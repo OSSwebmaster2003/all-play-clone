@@ -2,8 +2,8 @@
 import { RouterLink, useRoute } from "vue-router";
 import { ref, computed, onMounted } from "vue";
 import Container from "@/components/Container.vue";
-import LeftSidebar from "@/components/LeftSidebar.vue";
-import SlideDown from "@/components/SlideDown.vue";
+import LeftSidebar from "./LeftSidebar.vue";
+import SlideDown from "./SlideDown.vue";
 
 import logo from "@/assets/header/logo.svg";
 
@@ -65,7 +65,7 @@ onMounted(() => {
 <template>
   <header class="w-full bg-black h-[92px]">
     <Container>
-      <div class="w-full h-full flex items-center justify-between">
+      <div class="flex items-center justify-between w-full h-full">
         <!-- left sidebar  -->
         <LeftSidebar
           :display-left-sidebar="displayLeftSidebar"
@@ -75,7 +75,7 @@ onMounted(() => {
         <div class="flex items-center gap-6">
           <i
             @click="toggleLeftSidebar"
-            class="lg:block hidden pi-align-justify pi cursor-pointer text-3xl"
+            class="hidden text-3xl cursor-pointer lg:block pi-align-justify pi"
           ></i>
           <RouterLink to="/">
             <img :src="logo" alt="logo" class="lg:w-auto w-[95px]" />
@@ -107,7 +107,7 @@ onMounted(() => {
           <li
             v-for="(lang, index) in languages"
             :key="index"
-            class="text-secondary-white hover:underline cursor-pointer text-sm md:text-base font-medium"
+            class="text-sm font-medium cursor-pointer text-secondary-white hover:underline md:text-base"
           >
             {{ lang.label }}
           </li>
@@ -119,13 +119,13 @@ onMounted(() => {
             >
           </li>
           <!-- mobile part  -->
-          <div class="flex lg:hidden items-center justify-end gap-6 ml-2">
+          <div class="flex items-center justify-end gap-6 ml-2 lg:hidden">
             <RouterLink to="/search">
-              <i class="pi pi-search text-2xl" />
+              <i class="text-2xl pi pi-search" />
             </RouterLink>
             <i
               @click="toggleSlideDownPanel"
-              class="pi pi-bars text-2xl cursor-pointer"
+              class="text-2xl cursor-pointer pi pi-bars"
             ></i>
           </div>
         </ul>
