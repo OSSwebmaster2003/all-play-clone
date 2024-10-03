@@ -1,5 +1,11 @@
-<script setup></script>
+<script setup>
+import MoviesSwiper from "@/components/Movies/MoviesSwiper.vue";
+import MoviesTab from "@/components/Movies/MoviesTab.vue";
+</script>
 
 <template>
-  <h1>Movies Page</h1>
+  <div class="w-full mt-20">
+    <MoviesTab />
+    <MoviesSwiper />
+  </div>
 </template>

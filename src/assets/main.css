@@ -9,6 +9,8 @@
   color: white;
   transition: 0.3s linear all;
   font-family: Arial, Helvetica, sans-serif;
+}
+body {
   background: #000;
 }
 
