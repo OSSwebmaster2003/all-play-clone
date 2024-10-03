@@ -63,7 +63,7 @@ const movieTypes = [
 
 <template>
   <aside
-    class="fixed top-0 bottom-0"
+    class="fixed top-0 bottom-0 z-50"
     :class="
       displayLeftSidebar ? 'left-0 right-0 opacity-1' : '-left-full opacity-0'
     "
@@ -72,17 +72,17 @@ const movieTypes = [
       class="px-[70px] py-10 w-[320px] bg-black z-10 h-full overflow-auto overflow-y-scroll"
     >
       <!-- logo  -->
-      <div class="flex items-center justify-center gap-6 w-full">
+      <div class="flex items-center justify-center w-full gap-6">
         <i
           @click="toggleLeftSidebar"
-          class="pi pi-times text-2xl cursor-pointer"
+          class="text-2xl cursor-pointer pi pi-times"
         ></i>
         <RouterLink to="/"
-          ><img :src="logo" alt="logo" class="cursor-pointer w-auto"
+          ><img :src="logo" alt="logo" class="w-auto cursor-pointer"
         /></RouterLink>
       </div>
       <!-- nav links  -->
-      <nav class="mt-20 w-full">
+      <nav class="w-full mt-20">
         <p class="text-secondary-white text-[18px] mb-6 text-start w-full">
           Kinoteatr
         </p>

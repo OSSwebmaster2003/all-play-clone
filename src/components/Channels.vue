@@ -12,7 +12,10 @@ defineProps({
 </script>
 
 <template>
-  <div v-if="channels.length > 0" class="grid grid-cols-6 gap-2">
+  <div
+    v-if="channels.length > 0"
+    class="grid grid-cols-1 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+  >
     <Channel
       v-for="channel in channels"
       :key="channel?.id"

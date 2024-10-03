@@ -124,12 +124,12 @@ const handleFilterClick = (filter) => {
       <div v-if="isLoading">Loading...</div>
 
       <div v-else-if="channels.length">
-        <h2 class="text-[40px] font-sans font-medium w-full">
+        <h2 class="text-2xl md:text-[40px] font-sans font-medium w-full">
           Kanallar ro'yxati
         </h2>
         <!-- filters  -->
         <ul
-          class="flex items-center justify-start w-full gap-2 mt-6 overflow-auto"
+          class="flex items-center justify-start w-full gap-2 pb-2 mt-6 overflow-auto overflow-x-scroll"
         >
           <li
             v-for="(filter, index) in filters"
@@ -138,7 +138,7 @@ const handleFilterClick = (filter) => {
             :class="
               categoryId == filter?.categoryId
                 ? 'bg-orange'
-                : 'bg-secondary-white'
+                : 'bg-[rgba(255,255,255,0.2)]'
             "
             class="rounded-[40px] py-1 px-4 inline-block text-base whitespace-nowrap cursor-pointer"
           >

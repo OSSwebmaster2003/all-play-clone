@@ -83,7 +83,7 @@ const navItems = [
 
 <template>
   <div
-    class="fixed left-0 right-0 bg-black"
+    class="fixed left-0 right-0 z-50 bg-black"
     :class="
       displaySlideDownPanel ? 'top-0 bottom-0 opacity-1' : '-top-full opacity-0'
     "
@@ -97,23 +97,23 @@ const navItems = [
         <!-- actions  -->
         <div class="flex items-center justify-end gap-6">
           <RouterLink to="/search">
-            <i class="pi pi-search text-2xl" />
+            <i class="text-2xl pi pi-search" />
           </RouterLink>
           <i
             @click="toggleSlideDownPanel"
-            class="pi pi-times text-2xl cursor-pointer"
+            class="text-2xl cursor-pointer pi pi-times"
           ></i>
         </div>
       </header>
 
       <!-- filter pages  -->
       <div
-        class="w-full flex-nowrap overflow-x-scroll hide-scrollbar flex items-center justify-start gap-2 pb-2"
+        class="flex items-center justify-start w-full gap-2 pb-2 overflow-x-scroll flex-nowrap hide-scrollbar"
       >
         <span
           v-for="(nav, index) in navFilters"
           :key="index"
-          class="bg-secondary-white rounded-[40px] text-lg py-1 px-4 cursor-pointer leading-6 inline-block"
+          class="bg-[rgba(255,255,255,0.2)] rounded-[40px] text-lg py-1 px-4 cursor-pointer leading-6 inline-block whitespace-nowrap"
         >
           <RouterLink :to="nav.path">{{ nav.label }}</RouterLink>
         </span>
@@ -121,7 +121,7 @@ const navItems = [
 
       <!-- navigation  -->
       <div class="mt-10">
-        <p class="text-secondary-white font-mono mb-6">Navigatsiya</p>
+        <p class="mb-6 font-mono text-secondary-white">Navigatsiya</p>
         <nav>
           <ul class="flex flex-col gap-4">
             <li
@@ -137,7 +137,7 @@ const navItems = [
 
       <!-- other actions  -->
       <div class="mt-16">
-        <p class="text-secondary-white font-mono mb-6">Boshqa</p>
+        <p class="mb-6 font-mono text-secondary-white">Boshqa</p>
         <ul class="flex flex-col gap-4">
           <li class="text-[22px] tracking-tight">
             <RouterLink to="/login">Kirish</RouterLink>
