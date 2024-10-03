@@ -1,5 +1,6 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination } from "swiper/modules";
 import Container from "@/components/Container.vue";
@@ -10,13 +11,19 @@ import "swiper/css/pagination";
 import "swiper/css";
 
 const modules = [Pagination];
+const route = useRoute();
 
 const isLoading = ref(true);
 const featuredMovies = ref([]);
 
 const fetchFeaturedMovies = async () => {
+  let currentQuery = route.query.category;
   try {
-    const response = await axios.get(`${API_URL}/featured?category=movies`);
+    const response = await axios.get(
+      `${API_URL}/featured?category=${
+        currentQuery == null ? "movies" : currentQuery
+      }`
+    );
     featuredMovies.value = response?.data?.data;
   } catch (error) {
     console.log("Error fetching featured movies", error);
@@ -24,6 +31,14 @@ const fetchFeaturedMovies = async () => {
     isLoading.value = false;
   }
 };
+
+watch(
+  () => route.query.category,
+  (newQuery) => {
+    fetchFeaturedMovies();
+  },
+  { immediate: true }
+);
 
 onMounted(() => {
   fetchFeaturedMovies();

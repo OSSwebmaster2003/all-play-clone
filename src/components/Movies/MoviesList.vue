@@ -1,7 +1,8 @@
 <script setup>
 import Container from "@/components/Container.vue";
 import MovieCard from "@/components/Movies/MovieCard.vue";
-import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount, watch } from "vue";
+import { useRoute } from "vue-router";
 import axios from "axios";
 import API_URL from "@/config/config.js";
 
@@ -10,13 +11,18 @@ const currPage = ref(1);
 const observer = ref(null);
 const isLoading = ref(false);
 
+const route = useRoute();
+
 const fetchMovies = async () => {
+  let currentQuery = route.query.category;
   if (isLoading.value) return;
   isLoading.value = true;
 
   try {
     const response = await axios.get(
-      `${API_URL}/movies?per_page=12&category=movies&page=${currPage.value}`
+      `${API_URL}/movies?per_page=12&category=${
+        currentQuery == null ? "movies" : currentQuery
+      }&page=${currPage.value}`
     );
     movies.value = [...movies.value, ...response?.data?.data];
   } catch (error) {
@@ -25,6 +31,14 @@ const fetchMovies = async () => {
     isLoading.value = false;
   }
 };
+
+watch(
+  () => route.query.category,
+  (newQuery) => {
+    fetchMovies();
+  },
+  { immediate: true }
+);
 
 const createObserver = () => {
   observer.value = new IntersectionObserver((entries) => {

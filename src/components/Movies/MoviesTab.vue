@@ -1,11 +1,14 @@
 <script setup>
-import { onMounted, ref, computed } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { onMounted, ref, computed, watch } from "vue";
+import { RouterLink, useRoute, useRouter } from "vue-router";
 import axios from "axios";
 import Container from "@/components/Container.vue";
 import API_URL from "@/config/config.js";
 
 const route = useRoute();
+const router = useRouter();
+
+let category = ref("movies");
 let categories = ref([]);
 let isLoading = ref(true);
 
@@ -20,9 +23,32 @@ const fetchCategories = async () => {
   }
 };
 
+watch(
+  () => route.query.category,
+  (newCategory) => {
+    category.value = newCategory ? newCategory : null;
+  },
+  { immediate: true }
+);
+
 const currentPath = computed(() => {
   return route.path;
 });
+
+const currentCategoryId = computed(() => {
+  return route.query.category || null;
+});
+
+const handleFilterClick = (filter) => {
+  if (filter?.id == "movies") {
+    router.push({ path: route.path });
+  } else {
+    router.push({
+      path: route.path,
+      query: { category: filter?.id },
+    });
+  }
+};
 
 onMounted(() => {
   fetchCategories();
@@ -43,17 +69,17 @@ onMounted(() => {
         <li
           v-for="cat in categories"
           :key="cat?.id"
-          :class="
-            currentPath.endsWith(`/${cat?.id}`)
-              ? 'border-b-4 border-b-white'
-              : ''
-          "
-          class="py-4"
+          @click="handleFilterClick(cat)"
+          :class="{
+            'border-b-4 border-b-white':
+              currentCategoryId === cat?.id ||
+              (currentCategoryId === null && cat.id === 'movies'),
+          }"
+          class="py-4 cursor-pointer"
         >
-          <RouterLink
-            :to="`/${cat?.id}`"
+          <span
             class="text-base font-medium opacity-75 lg:text-xl hover:opacity-100 whitespace-nowrap"
-            >{{ cat?.name }}</RouterLink
+            >{{ cat?.name }}</span
           >
         </li>
       </ul>
