@@ -56,8 +56,10 @@ onBeforeUnmount(() => {
 <template>
   <section class="mt-20">
     <Container>
-      <h1 class="text-3xl font-bold leading-[1.2]">Yangi</h1>
-      <div class="grid grid-cols-6 gap-2 mt-4">
+      <h1 class="lg:text-3xl text-lg font-bold leading-[1.2]">Yangi</h1>
+      <div
+        class="grid grid-cols-2 gap-2 mt-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+      >
         <MovieCard v-for="movie in movies" :key="movie?.id" :movie="movie" />
       </div>
       <div id="sentinel" class="w-full h-10 mt-4"></div>

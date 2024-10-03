@@ -38,7 +38,7 @@ onMounted(() => {
 
       <ul
         v-else-if="categories.length > 0"
-        class="flex items-center justify-start w-full gap-16 overflow-auto border-b hide-scrollbar border-b-gray"
+        class="flex items-center justify-start w-full gap-5 overflow-auto border-b lg:gap-16 hide-scrollbar border-b-gray"
       >
         <li
           v-for="cat in categories"
@@ -52,7 +52,7 @@ onMounted(() => {
         >
           <RouterLink
             :to="`/${cat?.id}`"
-            class="text-xl font-medium opacity-75 hover:opacity-100"
+            class="text-base font-medium opacity-75 lg:text-xl hover:opacity-100 whitespace-nowrap"
             >{{ cat?.name }}</RouterLink
           >
         </li>

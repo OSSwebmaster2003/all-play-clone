@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="w-full h-[450px] relative">
+  <div class="w-full h-[380px] lg:h-[450px] relative">
     <img
       :src="movie?.published_bg?.url"
       alt="poster"
@@ -18,19 +18,21 @@ defineProps({
     />
 
     <!-- content  -->
-    <div class="relative z-10 w-full h-full px-12 opacity-100 py-11 bg-none">
-      <h2 class="text-[44px] leading-[56px] font-bold">
+    <div
+      class="relative z-10 w-full h-full px-4 py-4 opacity-100 sm:px-12 sm:py-11 bg-none"
+    >
+      <h2 class="lg:text-[44px] text-lg leading-[56px] font-bold">
         {{ movie?.title_orig }}
       </h2>
       <ul
-        class="flex flex-wrap items-center justify-start gap-[30px] list-disc"
+        class="flex truncated_ul flex-wrap items-center justify-start gap-2 lg:gap-[30px] list-none lg:list-disc"
       >
-        <li class="flex items-center justify-start gap-[6px]">
+        <li class="flex items-center justify-start gap-[3px] lg:gap-[6px]">
           <span class="font-mono text-lg font-bold tracking-[-2px]">
             <svg
               data-v-c6b5b2ce=""
               viewBox="0 0 224 94"
-              class="w-auto h-[22px] text-secondary-white"
+              class="w-auto h-4 lg:h-[22px] text-secondary-white"
             >
               <path
                 fill="rgba(255,255,255,0.5)"
@@ -38,14 +40,16 @@ defineProps({
                 d="M141.254 76.0294H127.094V0L141.254 6.1403V76.0294ZM165.111 63.4642C163.18 63.4642 162.43 62.7147 162.43 61.1085V53.3983C162.43 51.471 162.966 50.8284 164.467 50.0785L168.437 48.2585V62.9289C167.578 63.25 166.398 63.4642 165.111 63.4642ZM148.913 65.9272C148.913 72.2453 152.239 75.6716 158.031 75.6716H158.246C162.537 75.6716 165.326 73.8512 168.651 71.067V75.0294H182.383V27.4841C182.383 18.8103 177.984 14.4199 169.295 14.4199H162.644C153.955 14.4199 149.556 18.8103 149.556 27.4841V35.9438H162.644V28.662C162.644 27.0557 163.61 26.3063 165.219 26.3063H166.077C167.686 26.3063 168.437 27.0557 168.437 28.662V37.0147L156.851 40.9767C150.951 43.0113 148.913 45.7954 148.913 52.4346V65.9272ZM208.016 87.8082L224 16.0623H210.591L205.334 44.118L201.258 16.0623H187.205L198.254 71.8526L194.607 87.8082H208.016ZM105.354 30.197V61.8936C105.354 63.4999 104.603 64.2497 102.565 64.2497C101.063 64.2497 99.9905 63.9282 99.1322 63.6071V28.4838C99.9905 28.1624 101.063 27.8413 102.565 27.8413C104.603 27.8413 105.354 28.5907 105.354 30.197ZM119.514 66.2843V25.8066C119.514 18.9533 115.867 15.4197 109.645 15.4197H109.431C105.247 15.4197 102.029 17.4543 98.9176 20.2384V16.0622L84.9722 9.92193V93.9481L99.1322 87.8082V72.4952C102.243 74.9578 105.247 76.6713 109.431 76.6713H109.645C115.867 76.6713 119.514 73.1373 119.514 66.2843ZM77.2753 76.3614H63.1152V0.332411L77.2753 6.47272V76.3614ZM40.7688 76.3608H54.9289V6.47211L40.7688 0.331801V76.3608ZM13.5159 62.4405C13.5159 64.0467 14.267 64.7962 16.1981 64.7962C17.4852 64.7962 18.6654 64.582 19.5237 64.2609V49.5905L15.5544 51.4105C14.0524 52.1604 13.5159 52.803 13.5159 54.7303V62.4405ZM9.11792 77.0036C3.32515 77.0036 0 73.5773 0 67.2592V53.7667C0 47.1275 2.0377 44.3434 7.93775 42.3087L19.5237 38.3467V29.994C19.5237 28.3878 18.7727 27.6383 17.1637 27.6383H16.3054C14.6965 27.6383 13.7309 28.3878 13.7309 29.994V37.2758H0.643342V28.8162C0.643342 20.1423 5.04137 15.752 13.7309 15.752H20.3816C29.0711 15.752 33.4692 20.1423 33.4692 28.8162V76.3614H19.7382V72.3991C16.4127 75.1832 13.6236 77.0036 9.33288 77.0036H9.11792Z"
               ></path></svg
           ></span>
-          <span class="text-secondary-white">{{ movie?.rating_allplay }}</span>
+          <span class="text-xs lg:text-base text-secondary-white">{{
+            movie?.rating_allplay
+          }}</span>
         </li>
-        <li class="flex items-center justify-start gap-[6px]">
+        <li class="flex items-center justify-start gap-[3px] lg:gap-[6px]">
           <span class="font-mono text-lg font-bold tracking-[-2px]">
             <svg
               data-v-c6b5b2ce=""
               viewBox="0 0 215 215"
-              class="w-auto h-[22px] text-secondary-white"
+              class="w-auto h-4 lg:h-[22px] text-secondary-white"
             >
               <path
                 fill="rgba(255,255,255,0.5)"
@@ -54,16 +58,18 @@ defineProps({
               ></path>
             </svg>
           </span>
-          <span v-if="movie?.rating_kp" class="text-secondary-white">{{
-            movie?.rating_kp?.toFixed(1)
-          }}</span>
+          <span
+            v-if="movie?.rating_kp"
+            class="text-xs text-secondary-white lg:text-base"
+            >{{ movie?.rating_kp?.toFixed(1) }}</span
+          >
         </li>
-        <li class="flex items-center justify-start gap-[6px]">
+        <li class="flex items-center justify-start gap-[3px] lg:gap-[6px]">
           <span class="font-mono text-lg font-bold tracking-[-2px]">
             <svg
               data-v-c6b5b2ce=""
               viewBox="0 0 38 16"
-              class="w-auto h-4 text-secondary-white"
+              class="w-auto h-3 lg:h-4 text-secondary-white"
             >
               <path
                 fill="rgba(255,255,255,0.5)"
@@ -72,47 +78,51 @@ defineProps({
               ></path>
             </svg>
           </span>
-          <span class="text-secondary-white">{{ movie?.rating_imdb }}</span>
+          <span class="text-xs text-secondary-white lg:text-base">{{
+            movie?.rating_imdb
+          }}</span>
         </li>
-        <li>
-          <span class="text-[22px] text-secondary-white"
+        <li class="flex flex-wrap items-center">
+          <span class="lg:text-[22px] text-sm text-secondary-white"
             >{{ movie?.year }},</span
           >
           <span
             v-for="genre in movie?.genres"
             :key="genre?.id"
-            class="text-lg text-secondary-white"
+            class="text-xs lg:text-lg text-secondary-white"
             >{{ genre?.name }},</span
           >
         </li>
-        <li>
+        <li class="flex flex-wrap items-center">
           <span
             v-for="country in movie?.countries"
             :key="country?.id"
-            class="text-lg text-secondary-white"
+            class="text-xs lg:text-lg text-secondary-white"
             >{{ country?.name }},</span
           >
         </li>
         <li>
           <span
-            class="px-1 py-[2px] font-normal text-base border rounded-sm border-secondary-white text-secondary-white"
+            class="px-1 py-[2px] font-normal text-xs lg:text-base border rounded-sm border-secondary-white text-secondary-white"
             >{{ movie?.age }}+</span
           >
         </li>
       </ul>
       <!-- description  -->
       <div
-        class="description max-w-[430px] mt-6 font-normal pt-4 border-t border-t-secondary-white text-lg leading-8"
+        class="description max-w-[430px] mt-2 lg:mt-6 font-normal pt-2 lg:pt-4 border-t border-t-secondary-white text-sm lg:text-lg leading-6 lg:leading-8"
       >
         {{ movie?.description }}
       </div>
       <!-- buttons  -->
-      <div class="flex items-center justify-start gap-2 mt-20">
-        <button class="bg-orange">
+      <div
+        class="absolute flex items-center justify-start w-full gap-2 mt-10 lg:mt-20 bottom-4"
+      >
+        <button class="w-full bg-orange sm:w-auto">
           <i class="text-sm pi-play pi" />
           Filmni ko'rish
         </button>
-        <button class="bg-grey">Film haqida</button>
+        <button class="hidden bg-grey md:block">Film haqida</button>
       </div>
     </div>
   </div>
@@ -137,5 +147,14 @@ button {
 .bg-grey {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(24px);
+}
+
+@media (max-width: 1200px) {
+  button {
+    padding: 8px 20px;
+    font-size: 16px;
+  }
+}
+@media (max-width: 600px) {
 }
 </style>

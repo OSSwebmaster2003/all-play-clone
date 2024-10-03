@@ -26,7 +26,9 @@ defineProps({
       <h4 class="w-full leading-4 tracking-tight text-center text-yellow">
         Obuna
       </h4>
-      <p class="w-full mt-2 mb-3 text-xl text-center whitespace-nowrap">
+      <p
+        class="w-full mt-2 mb-3 overflow-hidden text-xl text-center truncate whitespace-nowrap text-ellipsis"
+      >
         {{ movie?.slug }}
       </p>
       <div

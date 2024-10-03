@@ -63,4 +63,13 @@ onMounted(() => {
 .swiper-slide-active {
   width: 70%;
 }
+
+@media (max-width: 1200px) {
+  .swiper-slide {
+    width: 85%;
+  }
+  .swiper-slide-active {
+    width: 85%;
+  }
+}
 </style>
