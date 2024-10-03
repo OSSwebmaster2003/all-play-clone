@@ -1,12 +1,19 @@
 <script setup>
 import axios from "axios";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import Container from "@/components/Container.vue";
 import Channels from "@/components/Channels.vue";
 import API_URL from "@/config/config.js";
 
+const route = useRoute();
+const router = useRouter();
+
+let search = ref("");
+let categoryId = ref(null);
 let channels = ref([]);
 let isLoading = ref(true);
+let searchDebounceTimeout = null;
 
 const fetchChannels = async () => {
   try {
@@ -18,6 +25,37 @@ const fetchChannels = async () => {
     isLoading.value = false;
   }
 };
+
+// watch categoryId
+watch(
+  () => route.query.categoryId,
+  (newCategoryId) => {
+    categoryId.value = newCategoryId ? Number(newCategoryId) : null;
+  },
+  { immediate: true }
+);
+
+const filteredChannelsByCategory = computed(() => {
+  if (!categoryId.value) {
+    return channels.value;
+  }
+
+  return channels.value.filter((channel) =>
+    channel.categories.some((cat) => cat.id == categoryId.value)
+  );
+});
+
+const filteredChannelsBySearch = computed(() => {
+  if (!search.value.trim()) {
+    return filteredChannelsByCategory.value;
+  } else {
+    return filteredChannelsByCategory.value.filter((channel) =>
+      channel?.name.toLowerCase().includes(search.value.toLowerCase())
+    );
+  }
+});
+
+// const filteredChannels = computed(async () => {});
 
 onMounted(() => {
   fetchChannels();
@@ -62,6 +100,22 @@ const filters = [
     categoryId: 2,
   },
 ];
+
+// filter functionality
+const handleFilterClick = (filter) => {
+  if (filter.categoryId === null) {
+    router.push({
+      path: route.path,
+    });
+  } else {
+    router.push({
+      path: route.path,
+      query: {
+        categoryId: filter?.categoryId,
+      },
+    });
+  }
+};
 </script>
 
 <template>
@@ -80,7 +134,13 @@ const filters = [
           <li
             v-for="(filter, index) in filters"
             :key="index"
-            class="bg-secondary-white rounded-[40px] py-1 px-4 inline-block text-base whitespace-nowrap cursor-pointer"
+            @click="handleFilterClick(filter)"
+            :class="
+              categoryId == filter?.categoryId
+                ? 'bg-orange'
+                : 'bg-secondary-white'
+            "
+            class="rounded-[40px] py-1 px-4 inline-block text-base whitespace-nowrap cursor-pointer"
           >
             {{ filter?.label }}
           </li>
@@ -88,12 +148,13 @@ const filters = [
         <!-- search input  -->
         <div class="w-full mt-4 mb-4">
           <input
+            v-model="search"
             type="text"
             placeholder="Qidirmoq"
             class="w-[400px] py-3 font-mono text-lg px-5 border-none placeholder:text-secondary-white outline-none"
           />
         </div>
-        <Channels :channels="channels" />
+        <Channels :channels="filteredChannelsBySearch" />
       </div>
 
       <div v-else>No channels available</div>

@@ -30,15 +30,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="mb-6 hover:scale-105">
+  <div class="mb-6 hover:scale-105 aspect-[16/9]">
     <RouterLink :to="`/${channel.slug}`">
-      <div class="relative flex flex-col gap-3">
+      <div class="relative flex flex-col w-full gap-3">
         <!-- poster  -->
-        <div class="w-full p-4 bg-white h-[100px]">
+        <div class="w-full h-full p-4 bg-white">
           <img
             :src="channel.icon.url_500x500"
             alt=""
-            class="object-scale-down w-full h-full bg-white"
+            class="object-scale-down w-full h-[100px] bg-white"
           />
           <!-- flags  -->
           <div class="absolute flex flex-col bg-white top-4">
