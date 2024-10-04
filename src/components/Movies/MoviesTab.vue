@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, computed, watch } from "vue";
+import { onMounted, ref, computed, watch, onBeforeUnmount } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import axios from "axios";
 import Container from "@/components/Container.vue";
@@ -11,6 +11,10 @@ const router = useRouter();
 let category = ref("movies");
 let categories = ref([]);
 let isLoading = ref(true);
+
+const isSticky = ref(false);
+const tabSection = ref(null);
+let headerHeight = 92;
 
 const fetchCategories = async () => {
   try {
@@ -50,13 +54,30 @@ const handleFilterClick = (filter) => {
   }
 };
 
+// make it sticky
+const handleScroll = () => {
+  if (window.scrollY >= headerHeight) {
+    isSticky.value = true;
+  } else {
+    isSticky.value = false;
+  }
+};
+
 onMounted(() => {
   fetchCategories();
+  window.addEventListener("scroll", handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
 });
 </script>
 
 <template>
-  <section class="w-full">
+  <section
+    :class="['w-full', { 'sticky top-[110px] bg-black': isSticky }]"
+    ref="tabSection"
+  >
     <Container>
       <div v-if="isLoading">
         <h1>Loading...</h1>
@@ -94,5 +115,13 @@ onMounted(() => {
 <style scoped>
 section {
   background: rgba(0, 0, 0, 0.5);
+}
+.sticky {
+  position: sticky;
+  top: 82px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  z-index: 30;
 }
 </style>

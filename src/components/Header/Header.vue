@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, useRoute } from "vue-router";
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import Container from "@/components/Container.vue";
 import LeftSidebar from "./LeftSidebar.vue";
 import SlideDown from "./SlideDown.vue";
@@ -12,6 +12,17 @@ const currPath = computed(() => route.path);
 
 // toggle left sidebar
 const displayLeftSidebar = ref(false);
+const isScrolled = ref(false);
+const header = ref(null);
+
+const handleScroll = () => {
+  if (window.scrollY > 10) {
+    isScrolled.value = true;
+  } else {
+    isScrolled.value = false;
+  }
+};
+
 const toggleLeftSidebar = () => {
   displayLeftSidebar.value = !displayLeftSidebar.value;
 };
@@ -58,12 +69,20 @@ const languages = [
 ];
 
 onMounted(() => {
-  console.log(currPath);
+  window.addEventListener("scroll", handleScroll);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
 });
 </script>
 
 <template>
-  <header class="w-full bg-black h-[92px]">
+  <header
+    :class="[
+      'w-full h-[92px] top-[-10px] sticky z-30',
+      isScrolled ? 'bg-black' : 'bg-none',
+    ]"
+  >
     <Container>
       <div class="flex items-center justify-between w-full h-full">
         <!-- left sidebar  -->
